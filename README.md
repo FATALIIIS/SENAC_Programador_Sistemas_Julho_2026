@@ -1,0 +1,1 @@
+# SENAC_Programador_Sistemas_Julho_2026
