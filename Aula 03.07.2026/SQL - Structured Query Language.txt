@@ -1,0 +1,49 @@
+____________________________________________________________________________________________________________________________________________________
+SQL - Structured Query Language
+Linguagem de Consulta Estruturada
+
+DDL - Data Definition Language
+DML - Data Manipulation Language
+DQL - Data Query Language
+DTL - Data Transiction Language 
+DCL - Data Control Language 
+____________________________________________________________________________________________________________________________________________________
+Excluindo um banco de dados 
+
+DROP DATABASE <nome>
+____________________________________________________________________________________________________________________________________________________
+Criando o Banco de Dados
+
+CREATE DATABASE <nome> COLLATE <colação>
+Ex: CREATE DATABASE estoque COLLATE uft8mb4_general_ci;
+A colação serve para o banco identificar caracteres como o "Ç" por exemplo.
+____________________________________________________________________________________________________________________________________________________
+Criando uma tabela 
+
+use <nome banco>
+CREATE TABLE <nome>(
+	<nome_chave> <tipo> <nulo?> primary key,
+	<campo1> <tipo> <nulo?>,
+	...
+	<campoN> <tipo> <nulo?>
+);
+Ex: 
+use estoque;
+CREATE TABLE fabricante(
+    cod_fab int not null PRIMARY KEY,
+    nome varchar(30),
+    endereco varchar(50),
+    cnpj bigint not null UNIQUE,
+    telefone bigint not null,
+    cidade varchar(30),
+    FOREIGN KEY(cod_fab) REFERENCES fabricante(cod_fab)    
+);
+____________________________________________________________________________________________________________________________________________________  
+Chave Estrangeira
+
+FOREIGN KEY(coluna) REFERENCES <tabela>(chave)
+____________________________________________________________________________________________________________________________________________________  
+Renomeando uma tabela
+
+RENAME TABLE <nome> to <novo nome>;  
+____________________________________________________________________________________________________________________________________________________ 
