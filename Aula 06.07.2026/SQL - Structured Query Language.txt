@@ -1,0 +1,128 @@
+____________________________________________________________________________________________________________________________________________________
+SQL - Structured Query Language
+Linguagem de Consulta Estruturada
+
+DDL - Data Definition Language
+DML - Data Manipulation Language
+DQL - Data Query Language
+DTL - Data Transiction Language 
+DCL - Data Control Language 
+____________________________________________________________________________________________________________________________________________________
+Excluindo um banco de dados 
+
+DROP DATABASE <nome>
+____________________________________________________________________________________________________________________________________________________
+Criando o Banco de Dados
+
+CREATE DATABASE <nome> COLLATE <colação>
+Ex: CREATE DATABASE estoque COLLATE utf8mb4_general_ci;
+A colação serve para o banco identificar caracteres como o "Ç" por exemplo.
+____________________________________________________________________________________________________________________________________________________
+Criando uma tabela 
+
+use <nome banco>
+CREATE TABLE <nome>(
+	<nome_chave> <tipo> <nulo?> primary key,
+	<campo1> <tipo> <nulo?>,
+	...
+	<campoN> <tipo> <nulo?>
+);
+Ex: 
+use estoque;
+CREATE TABLE fabricante(
+    cod_fab int not null PRIMARY KEY,
+    nome varchar(30),
+    endereco varchar(50),
+    cnpj bigint not null UNIQUE,
+    telefone bigint not null,
+    cidade varchar(30),
+    FOREIGN KEY(cod_fab) REFERENCES fabricante(cod_fab)    
+);
+____________________________________________________________________________________________________________________________________________________  
+Chave Estrangeira
+
+FOREIGN KEY(coluna) REFERENCES <tabela>(chave)
+____________________________________________________________________________________________________________________________________________________  
+Renomeando uma tabela
+
+RENAME TABLE <nome> to <novo nome>;  
+____________________________________________________________________________________________________________________________________________________ 
+Excluindo uma tabela (Exclui Permanentemente*)
+
+DROP TABLE <nome_tabela>;
+____________________________________________________________________________________________________________________________________________________ 
+Inserindo dados na tabela
+
+INSERT INTO <tabela> VALUES (valor1,valor2,valor3,...) <- (Obrigatório todos os campos*)
+
+ou
+
+INSERT INTO <tabela> (campo1,campo2,...) VALUES (valor1,valor2,...)
+Ex:
+INSERT INTO fabricante VALUES
+(1,'Empresa C&A','Rua X, Nº993',12345678,'(41)3224-0924','Curitiba');
+
+INSERT INTO fabricante(cod_fab,cnpj,nome,endereco,telefone,cidade)
+VALUES (2,1234567890,'Satia','Av. Padre Carlos, Nº990','(42)99986-5600','Ponta Grossa');
+
+INSERT INTO produto(cod_pro,cod_fab,nome,descricao,quantidade,valor,data_fab)
+VALUES(1,2,'Presunto Defumado','Presunto Defumado Fatiado Premium Satia 200g',40,15.50,'2026-07-01'),
+(2,1,'Jaqueta Esportiva','Jaqueta Esportiva de Couro, Preta',5,299.00,'2026-07-01')
+
+TIPOS 
+tinyint - 9 ao 9.
+int - 1,23,-7.
+bigint - maior que 10 digitos.
+
+char(número de caracteres) - 'texto'
+varchar(número de caracteres) - 'texto'
+text - 'texto'
+(Colocar texto entre aspas simples ('')) 
+
+float
+real  
+decimal
+
+date - 'AAAA-mm-dd' Ex: '2026-07-06';
+time - 'hh:mm:ss' Ex : '14:38:30';
+datetime - 'AAAA-mm-dd hh:mm:ss' Ex: '2026-07-06 14:40:00';
+
+____________________________________________________________________________________________________________________________________________________
+Adicionando coluna na tabela
+
+ALTER TABLE <nome_tabela> ADD <campo> <tipo>
+AFTER <campo>;
+Ex:
+ALTER TABLE produto ADD validade date
+AFTER data_fab;
+____________________________________________________________________________________________________________________________________________________
+Renomeando uma coluna
+
+ALTER TABLE <nome_tabela> CHANGE <nome_antigo> <nome_novo> <tipo>;
+Ex:
+ALTER TABLE produto CHANGE validade data_val date;
+____________________________________________________________________________________________________________________________________________________
+Mudando o tipo de uma coluna
+
+ALTER TABLE <nome> MODIFY COLUMN <coluna> <tipo>;
+Ex:
+ALTER TABLE produto MODIFY COLUMN data_fab varchar(30);
+____________________________________________________________________________________________________________________________________________________
+Excluindo uma coluna 
+
+ALTER TABLE <nome> DROP COLUMN <coluna>;
+Ex:
+ALTER TABLE produto DROP COLUMN data_val;
+____________________________________________________________________________________________________________________________________________________
+Atualizando um valor em uma coluna
+
+UPDATE <tabela> SET <campo>=<'valor'> WHERE <campo_ref>=<referencia>
+Ex:
+UPDATE fabricante SET cidade='Ponta Grossa', telefone='(42)4288-1456' WHERE cod_fab=1;
+____________________________________________________________________________________________________________________________________________________
+Excluindo um valor da tabela
+
+DELETE FROM <tabela> WHERE <campo_referencia>=<valor>;
+Ex:
+DELETE FROM produto WHERE cod_pro=2;
+____________________________________________________________________________________________________________________________________________________
