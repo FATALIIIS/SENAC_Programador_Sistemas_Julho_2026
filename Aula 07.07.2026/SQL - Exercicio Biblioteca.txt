@@ -1,0 +1,36 @@
+1) crie o banco de dados biblioteca
+2) crie as tabelas
+
+Livro
+cod_liv int PK
+autor varchar(40)
+titulo varchar(60)
+editora varchar(30)
+ano int
+
+Usuario
+cod_usu int PK
+nome varchar(40)
+endereco varchar(50)
+bairro varchar(30)
+cidade varchar(35)
+telefone bigint
+nascimento date
+
+Emprestimo
+cod_emp int PK
+cod_usu int FK
+data_hora datetime
+
+Itens
+cod_it int PK
+cod_emp int FK
+cod_liv int FK
+
+3) Adicione a coluna cidade varchar(30) para tabela livro após editora
+4) Renomeie a coluna nascimento de usuário para data_nasci date
+5) Insira o livro 1- Minhas memórias do Genésio de Paula, editora Ática, São Paulo, 1999
+6) Insira mais 2 livros, 2 usuários,1 empréstimo para cada usuário e pelo menos dois livros para cada empréstimo.
+7) Altere o ano de publicação do livro 2 para 2004
+8) Exclua o item nº 4 da tabela itens
+
