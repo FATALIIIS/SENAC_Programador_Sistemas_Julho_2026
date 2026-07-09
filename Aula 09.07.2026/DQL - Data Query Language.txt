@@ -1,0 +1,90 @@
+DQL - Data Query Language
+____________________________________________________________________________________________________________________________________________________
+CONSULTAS
+
+Mostrar todos os campos de uma tabela:
+
+SELECT <campos> FROM <tabela>
+Ex:
+SELECT nome,endereco FROM fabricante;
+
+OU
+SELECT * FROM produto; (*=significa todos os campos)
+Ex:
+SELECT * FROM produto;
+____________________________________________________________________________________________________________________________________________________
+Ordenando os resultados
+
+SELECT <campos> FROM <tabela> ORDER BY <campo>;
+Mostre o nome, endereço, bairros dos usuários ordenados por nome
+Ex:
+SELECT nome,endereco,bairro FROM usuario ORDER BY nome;
+SELECT nome,endereco,bairro FROM usuario ORDER BY bairro DESC;
+SELECT DISTINCT nome,endereco,bairro FROM usuário ORDER BY <campo>;
+
+(SELECT DISTINCT elimina <campos> idênticos)
+(DESC é para ordem decrescente)
+____________________________________________________________________________________________________________________________________________________
+Selecionando campos por uma condição
+
+SELECT <campos> FROM <tabela> WHERE <condição>
+Condições 
+
+Igual (=)
+Maior (>)
+Menor (<)
+Maior ou Igual (>=)
+Menor ou Igual (<=)
+Diferente (<>)
+between <valor1> and <valor2> (entre 2 valores)
+in() (está em)
+AND (e)
+OR (ou)
+LIKE (parecido)
+
+Ex:
+Mostre o nome e a quantidade dos produtos cuja quantidade é maior que 10 
+SELECT nome,quantidade FROM produto WHERE quantidade>10;
+Ex:
+SELECT nome,cod_tur FROM alunos WHERE cod_tur in(1,2) ORDER BY nome;
+SELECT nome,cod_tur,cidade FROM alunos WHERE cod_tur=2 AND cidade='Curitiba';
+____________________________________________________________________________________________________________________________________________________
+SUBCONSULTAS
+
+SELECT <campos> FROM <tabela> WHERE <campo>=(SELECT <campo> FROM <tabela2> WHERE <outro_campo>=<valor>
+Ex:
+Mostre o nome dos produtos, seu preço e quantidade daqueles fabricados em Ponta Grossa
+SELECT nome,quantidade,valor FROM produto WHERE cod_fab in(SELECT cod_fab FROM fabricante WHERE cidade='Ponta Grossa');
+SELECT nome FROM cursos WHERE cod_cur in(SELECT cod_cur FROM alunos WHERE cidade='Curitiba');
+____________________________________________________________________________________________________________________________________________________
+FUNÇÕES
+
+SELECT <função>(<parâmetros>) AS 'rótulo' FROM <tabela> ...
+
+SUM() - Somar valores
+MAX() - Maior valor 
+MIN() - Menor valor
+COUNT() - Contagem de valores
+AVG() - Média de valores
+
+Ex:
+SELECT COUNT(matricula) AS 'total alunos programador' FROM alunos WHERE cod_cur=(SELECT cod_cur FROM cursos WHERE nome LIKE 'Programador%');
+SELECT COUNT(cod_cur) AS 'Total Cursos' FROM cursos;
+____________________________________________________________________________________________________________________________________________________
+JUNÇÕES
+
+Quando você precisa unir colunas de tabelas diferentes em um mesmo resultado
+
+SELECT <inicial_tabela1>.<campo_tabela1>,...,<inicial_tabela2>.<campo_tabela2> FROM <tabela1> <sigla> JOIN <tabela2> <sigla2> -USING (<chave_estrangeira>) ou WHERE <tabela1>.chave primária=<tabela2>.chave estrangeira- ...
+
+Ex:
+Mostre o nome dos alunos e seus respectivos cursos em ordem (tudo isso no mesmo resultado)
+SELECT a.nome,c.nome AS 'Curso' FROM alunos a JOIN cursos c USING(cod_cur) ORDER BY curso;
+
+Mostra o nome dos alunos, o código da turma, a sala e o nome do curso em ordem do curso e depois por nome
+SELECT a.nome,t.cod_tur,t.sala,c.nome AS 'curso' FROM alunos a JOIN turmas t JOIN cursos c WHERE a.cod_tur=t.cod_tur AND c.cod_cur=t.cod_cur ORDER BY curso,a.nome
+
+Mostre a quantidade de alunos por curso
+SELECT COUNT(a.matricula) AS 'total alunos',c.nome AS 'curso' FROM alunos a JOIN cursos c USING(cod_cur) GROUP BY curso;
+____________________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________________________________
