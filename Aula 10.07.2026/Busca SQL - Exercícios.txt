@@ -1,0 +1,65 @@
+BUSCA SQL - Base Biblioteca
+______________________________________________________________________________________________________________________________
+1)Mostre todos os usuários; 
+Ex: 
+SELECT * FROM usuário;
+
+______________________________________________________________________________________________________________________________
+2)Mostre o titulo e o autor dos livros;
+Ex:
+SELECT autor,titulo FROM livros;
+
+______________________________________________________________________________________________________________________________
+2.1)Mostre o título e o autor em ordem alfabética;
+Ex:
+SELECT autor,titulo FROM livros ORDER BY titulo,autor;
+
+______________________________________________________________________________________________________________________________
+3)Mostre o nome dos usuários em ordem decrescente(Z-A);
+Ex:
+SELECT nome FROM usuario ORDER BY nome DESC;
+
+______________________________________________________________________________________________________________________________
+4)Mostre todos os usuários que moram em Curitiba;
+Ex:
+SELECT nome FROM usuario WHERE cidade='Curitiba';
+
+______________________________________________________________________________________________________________________________
+5)Mostre todos os livros cujo título começa com a letra 'M';
+Ex:
+SELECT titulo FROM livros WHERE titulo like 'M%';
+
+______________________________________________________________________________________________________________________________
+6)Mostre a média de ano de publicação dos livros;
+Ex:
+SELECT AVG(ano) AS 'Média do ano de publicações dos livros' FROM livros;
+
+______________________________________________________________________________________________________________________________
+7)Mostre o nome do usuário do empréstimo do dia 2026-07-07 17:00:00;
+Ex;
+SELECT nome FROM usuario WHERE cod_usu in(SELECT cod_usu FROM emprestimo WHERE data_hora='2026-07-07 17:00:00');
+
+______________________________________________________________________________________________________________________________
+8)Mostre o nome e o telefone do empréstimo de código 1;
+Ex:
+SELECT nome,telefone FROM usuario WHERE cod_usu in(SELECT cod_usu FROM emprestimo WHERE cod_emp='1');
+
+______________________________________________________________________________________________________________________________
+9)Mostre os títulos dos livros emprestado pela Paula de Fátima;
+Ex:
+SELECT titulo FROM livros WHERE cod_liv in(
+(SELECT cod_liv FROM itens WHERE cod_emp in
+(SELECT cod_emp FROM emprestimo WHERE cod_usu=                                           
+(SELECT cod_usu FROM usuario WHERE nome='Paula de Fátima'))))
+
+______________________________________________________________________________________________________________________________
+10)Mostra o nome do usuário e a data dos empréstimos;
+Ex:
+SELECT u.nome,e.data_hora AS 'Data dos Empréstimos' FROM usuario u JOIN emprestimo e USING(cod_usu);
+
+______________________________________________________________________________________________________________________________
+11)Mostre a data e o título do livro dos empréstimos.
+Ex:
+SELECT e.data_hora,l.titulo FROM livros l JOIN itens i JOIN emprestimo e WHERE l.cod_liv=i.cod_liv AND e.cod_emp=i.cod_emp;
+
+______________________________________________________________________________________________________________________________
