@@ -1,0 +1,122 @@
+:root{
+	--fundo:#265B83;
+	--cor_letra:#FFFFFF;
+	--cor_botao:#EF854B;
+	--letra_botao:#FFFFFF;
+	--letra_titulo:#FFFFFF;
+	--borda:1.5px solid black;
+	--arredondamento:16px;
+}
+*{
+	margin: 0px;
+	padding: 0px;	
+}
+section{
+	display: flex;
+	justify-content: center;
+}
+section.topo{
+	width: 100vw;
+	height: 10vh;
+	background-color: var(--fundo);
+}
+#logo{
+	width: 10%;
+	height: 100%;
+}
+#logo img{
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+}
+#menu{
+	width: 90%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+ul.nav{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	margin-left: 32%;
+	width: 90%;
+	height: 30%;
+	display: flex;
+}
+ul.nav li{
+	width: 13%;
+	height: 100%;
+	position: relative;
+	margin-right: 6%;
+	background-color: var(--cor_botao);
+	border: var(--borda);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2vw;
+	color: var(--letra_botao);
+}
+ul.nav li a{
+	font-size: 1.2vw;
+	text-decoration: none;
+	color: var(--letra_botao);
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+ul.nav li ol{
+	list-style-type: none;
+	width: 100%;
+	display: none;
+	float: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1;
+}
+ul.nav li ol li{
+	float: none;
+	width: 100%;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+ul.nav li ol li a{
+	display: block;
+	text-decoration: none;
+	color: var(--letra_botao);
+}
+ul.nav li:hover ol{
+	display: block;
+}
+ul.nav li:hover{
+	background-color: #812E00;
+	color:var(--cor_botao);
+}
+ul.nav li a:hover{
+	color:var(--cor_botao);
+}
+form{
+	width: 60vw;
+	margin-left: 20vw;
+	height: auto;
+	margin-top: 10vh;
+	background-color: var(--fundo);
+	color: var(--cor_letra);
+	border: var(--borda);
+	border-radius: var(--arredondamento);
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+form h1{
+	color: var(--letra_titulo);
+}
+h2{
+	color: var(--cor_letra);
+}
